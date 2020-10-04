@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import Input from '../../components/Input';
 import ButtonSubmit from '../../components/Button';
@@ -10,6 +12,8 @@ import {
 } from './styles';
 
 export default function Estagio() {
+    const history = useHistory();
+
     const [estagio, setEstagio] = useState('');
     const [matricula, setMatricula] = useState('');
     const [nome, setNome] = useState('');
@@ -19,6 +23,15 @@ export default function Estagio() {
 
     const [isSelected, setIsSelected] = useState(false);
 
+    useEffect(() => {
+        const localData = localStorage.getItem('createInternship');
+        const dat = JSON.parse(localData);
+
+        if (dat) {
+            history.push('/viewestagio');
+        }
+    }, []);
+
     function handleSelectedEstagio(event) {
         setEstagio(event.target.value);
         setIsSelected(true);
@@ -27,8 +40,14 @@ export default function Estagio() {
     function handleRequestNewInternship(event) {
         event.preventDefault();
 
+        if (matricula != '404513') {
+            toast.error('Matrícula incorreta, tente novamente!');
+            return;
+        }            
+
         const data = {
             id: '1',
+            type: estagio,
             name: nome,
             email: email,
             matricula: matricula,
@@ -36,13 +55,13 @@ export default function Estagio() {
         };
 
         setInternship(data);
-
         localStorage.setItem('createInternship', JSON.stringify(data));
 
-        const localData = localStorage.getItem('createInternship');
-        const dat = JSON.parse(localData);
+        toast.success('Solicitação realizada com sucesso!');
 
-        console.log(dat);
+        setInterval(() => {
+            history.push('/viewestagio');
+        }, 3000);
     }
 
     return (
