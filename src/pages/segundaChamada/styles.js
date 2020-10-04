@@ -14,25 +14,15 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.span`
-  margin-top: 15px;
+  margin-top: 20px;
   color: #191920;
-  font-size: 18px;
+  font-size: 21px;
   margin-bottom: 10px;
+  font-weight: bold;
 `;
 
-export const TypeArea = styled.div`
+export const table = styled.table`
   display: flex;
-
-  flex-direction: column;
-
-  margin-top: 25px;
-`;
-
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-
-  margin: 15px;
-
-  width: 100%;
+  justify-content: center;
+  border: 1px solid gray;
 `;
