@@ -4,13 +4,18 @@ import Input from '../../components/Input';
 import ButtonSubmit from '../../components/Button';
 import Select from '../../components/Select';
 
-import { Container, Title, TypeArea, Form, NameArea, MatriculaArea, EmailArea, Row } from './styles';
+import {
+    Container, Title, TypeArea, Form, NameArea,
+    MatriculaArea, EmailArea, Row
+} from './styles';
 
 export default function Estagio() {
     const [estagio, setEstagio] = useState('');
     const [matricula, setMatricula] = useState('');
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
+
+    const [internship, setInternship] = useState([]);
 
     const [isSelected, setIsSelected] = useState(false);
 
@@ -19,7 +24,26 @@ export default function Estagio() {
         setIsSelected(true);
     }
 
-    console.log(estagio);
+    function handleRequestNewInternship(event) {
+        event.preventDefault();
+
+        const data = {
+            id: '1',
+            name: nome,
+            email: email,
+            matricula: matricula,
+            status: 'pending'
+        };
+
+        setInternship(data);
+
+        localStorage.setItem('createInternship', JSON.stringify(data));
+
+        const localData = localStorage.getItem('createInternship');
+        const dat = JSON.parse(localData);
+
+        console.log(dat);
+    }
 
     return (
         <Container>
@@ -27,6 +51,7 @@ export default function Estagio() {
                 <Title>Nível de estágio</Title>
 
                 <Select
+                    dataTestId="select-field"
                     value={estagio}
                     onChange={handleSelectedEstagio}
                     title="Selecione uma opção"
@@ -39,13 +64,17 @@ export default function Estagio() {
 
             {isSelected && (
                 <>
-                    <Form>
+                    <Form
+                        data-testid="form-field"
+                        onSubmit={handleRequestNewInternship}
+                    >
                         <Row>
                             <NameArea>
                                 <Title>Nome</Title>
 
                                 <Input
-                                    placeholder="Infome seu nome"
+                                    value={nome}
+                                    placeholder="Informe seu nome"
                                     onChange={(event) => setNome(event.target.value)}
                                 />
                             </NameArea>
@@ -54,7 +83,8 @@ export default function Estagio() {
                                 <Title>Matrícula</Title>
 
                                 <Input
-                                    placeholder="Infome sua matrícula"
+                                    value={matricula}
+                                    placeholder="Informe sua matrícula"
                                     onChange={(event) => setMatricula(event.target.value)}
                                 />
                             </MatriculaArea>
@@ -64,19 +94,18 @@ export default function Estagio() {
                             <Title>E-mail</Title>
 
                             <Input
-                                placeholder="Infome seu e-mail"
+                                value={email}
+                                placeholder="Informe seu e-mail"
                                 onChange={(event) => setEmail(event.target.value)}
                             />
                         </EmailArea>
 
-
+                        <ButtonSubmit
+                            type="submit"
+                        >
+                            Solicitar
+                        </ButtonSubmit>
                     </Form>
-
-                    <ButtonSubmit
-                        onClick={() => { }}
-                    >
-                        Solicitar
-                    </ButtonSubmit>
                 </>
             )}
         </Container>

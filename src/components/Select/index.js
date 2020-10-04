@@ -2,10 +2,11 @@ import React from 'react';
 
 import { Container, SelectInput, Option } from './styles';
 
-export default function Select({ value, onChange, title, options }) {
+export default function Select({ dataTestId, value, onChange, title, options }) {
     return (
         <Container>
             <SelectInput
+                data-testid={dataTestId}
                 value={value}
                 onChange={onChange}
             >
