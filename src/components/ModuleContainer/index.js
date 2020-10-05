@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Container, Title } from "./styles";
 
 export default function ModuleContainer({ children, title }) {
