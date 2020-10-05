@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import 'react-toastify/dist/ReactToastify.css';
+import { createGlobalStyle } from "styled-components";
+import "react-toastify/dist/ReactToastify.css";
 
 export default createGlobalStyle`
     * {
@@ -11,6 +11,7 @@ export default createGlobalStyle`
 
     body, html {
         background-color: #7159c1;
+        font-family: 'Roboto' ;
     }
 
     button {
