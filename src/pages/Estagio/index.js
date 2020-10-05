@@ -1,132 +1,137 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
-import Input from '../../components/Input';
-import ButtonSubmit from '../../components/Button';
-import Select from '../../components/Select';
+import Input from "../../components/Input";
+import ButtonSubmit from "../../components/Button";
+import Select from "../../components/Select";
+import ModuleContainer from "../../components/ModuleContainer";
 
 import {
-    Container, Title, TypeArea, Form, NameArea,
-    MatriculaArea, EmailArea, Row
-} from './styles';
+  Container,
+  Title,
+  TypeArea,
+  Form,
+  NameArea,
+  MatriculaArea,
+  EmailArea,
+  Row,
+} from "./styles";
 
 export default function Estagio() {
-    const history = useHistory();
+  const history = useHistory();
 
-    const [estagio, setEstagio] = useState('');
-    const [matricula, setMatricula] = useState('');
-    const [nome, setNome] = useState('');
-    const [email, setEmail] = useState('');
+  const [estagio, setEstagio] = useState("");
+  const [matricula, setMatricula] = useState("");
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
 
-    const [internship, setInternship] = useState([]);
+  const [internship, setInternship] = useState([]);
 
-    const [isSelected, setIsSelected] = useState(false);
+  const [isSelected, setIsSelected] = useState(false);
 
-    useEffect(() => {
-        const localData = localStorage.getItem('createInternship');
-        const dat = JSON.parse(localData);
+  useEffect(() => {
+    const localData = localStorage.getItem("createInternship");
+    const dat = JSON.parse(localData);
 
-        if (dat) {
-            history.push('/viewestagio');
-        }
-    }, []);
+    if (dat) {
+      history.push("/viewestagio");
+    }
+  }, []);
 
-    function handleSelectedEstagio(event) {
-        setEstagio(event.target.value);
-        setIsSelected(true);
+  function handleSelectedEstagio(event) {
+    setEstagio(event.target.value);
+    setIsSelected(true);
+  }
+
+  function handleRequestNewInternship(event) {
+    event.preventDefault();
+
+    if (matricula != "404513") {
+      toast.error("Matrícula incorreta, tente novamente!");
+      return;
     }
 
-    function handleRequestNewInternship(event) {
-        event.preventDefault();
+    const data = {
+      id: "1",
+      type: estagio,
+      name: nome,
+      email: email,
+      matricula: matricula,
+      status: "pending",
+    };
 
-        if (matricula != '404513') {
-            toast.error('Matrícula incorreta, tente novamente!');
-            return;
-        }            
+    setInternship(data);
+    localStorage.setItem("createInternship", JSON.stringify(data));
 
-        const data = {
-            id: '1',
-            type: estagio,
-            name: nome,
-            email: email,
-            matricula: matricula,
-            status: 'pending'
-        };
+    toast.success("Solicitação realizada com sucesso!");
 
-        setInternship(data);
-        localStorage.setItem('createInternship', JSON.stringify(data));
+    setInterval(() => {
+      history.push("/viewestagio");
+    }, 3000);
+  }
 
-        toast.success('Solicitação realizada com sucesso!');
+  return (
+    <ModuleContainer title="Modulo Estagio">
+      <Container>
+        <TypeArea>
+          <Title>Nível de estágio</Title>
 
-        setInterval(() => {
-            history.push('/viewestagio');
-        }, 3000);
-    }
+          <Select
+            dataTestId="select-field"
+            value={estagio}
+            onChange={handleSelectedEstagio}
+            title="Selecione uma opção"
+            options={[
+              { value: "Estágio I", label: "Estágio I" },
+              { value: "Estágio II", label: "Estágio II" },
+            ]}
+          />
+        </TypeArea>
 
-    return (
-        <Container>
-            <TypeArea>
-                <Title>Nível de estágio</Title>
+        {isSelected && (
+          <>
+            <Form
+              data-testid="form-field"
+              onSubmit={handleRequestNewInternship}
+            >
+              <Row>
+                <NameArea>
+                  <Title>Nome</Title>
 
-                <Select
-                    dataTestId="select-field"
-                    value={estagio}
-                    onChange={handleSelectedEstagio}
-                    title="Selecione uma opção"
-                    options={[
-                        { value: 'Estágio I', label: 'Estágio I' },
-                        { value: 'Estágio II', label: 'Estágio II' },
-                    ]}
+                  <Input
+                    value={nome}
+                    placeholder="Informe seu nome"
+                    onChange={(event) => setNome(event.target.value)}
+                  />
+                </NameArea>
+
+                <MatriculaArea>
+                  <Title>Matrícula</Title>
+
+                  <Input
+                    value={matricula}
+                    placeholder="Informe sua matrícula"
+                    onChange={(event) => setMatricula(event.target.value)}
+                  />
+                </MatriculaArea>
+              </Row>
+
+              <EmailArea>
+                <Title>E-mail</Title>
+
+                <Input
+                  value={email}
+                  placeholder="Informe seu e-mail"
+                  onChange={(event) => setEmail(event.target.value)}
                 />
-            </TypeArea>
+              </EmailArea>
 
-            {isSelected && (
-                <>
-                    <Form
-                        data-testid="form-field"
-                        onSubmit={handleRequestNewInternship}
-                    >
-                        <Row>
-                            <NameArea>
-                                <Title>Nome</Title>
-
-                                <Input
-                                    value={nome}
-                                    placeholder="Informe seu nome"
-                                    onChange={(event) => setNome(event.target.value)}
-                                />
-                            </NameArea>
-
-                            <MatriculaArea>
-                                <Title>Matrícula</Title>
-
-                                <Input
-                                    value={matricula}
-                                    placeholder="Informe sua matrícula"
-                                    onChange={(event) => setMatricula(event.target.value)}
-                                />
-                            </MatriculaArea>
-                        </Row>
-
-                        <EmailArea>
-                            <Title>E-mail</Title>
-
-                            <Input
-                                value={email}
-                                placeholder="Informe seu e-mail"
-                                onChange={(event) => setEmail(event.target.value)}
-                            />
-                        </EmailArea>
-
-                        <ButtonSubmit
-                            type="submit"
-                        >
-                            Solicitar
-                        </ButtonSubmit>
-                    </Form>
-                </>
-            )}
-        </Container>
-    )
+              <ButtonSubmit type="submit">Solicitar</ButtonSubmit>
+            </Form>
+          </>
+        )}
+      </Container>
+    </ModuleContainer>
+  );
 }
