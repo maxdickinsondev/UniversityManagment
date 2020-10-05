@@ -10,10 +10,16 @@ export default createGlobalStyle`
     }
 
     body, html {
-        background-color: #7159c1;
     }
 
     button {
         cursor: pointer;
+    }
+
+    .ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected{
+        background-color: #A8A8A8;
+    }
+    .ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover {
+        background-color: #A8A8A8;
     }
 `;
