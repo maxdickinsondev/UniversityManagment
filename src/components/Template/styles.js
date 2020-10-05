@@ -8,7 +8,7 @@ export const HeaderContainer = styled(Header)`
 `
 
 export const Body = styled.div`
-  height: 100vh
+  height: 80vh
 `;
 
 export const FooterContainer = styled(Footer)`
