@@ -167,6 +167,7 @@ export default function ComplementaryHours() {
               />
               <Title>Quantidade de horas:</Title>
               <Input
+                type="number"
                 value={hours}
                 placeholder="Ex: 64"
                 onChange={e => setHours(e.target.value)}
@@ -174,16 +175,20 @@ export default function ComplementaryHours() {
               <div>
                 <Title>Data de inicio:</Title>
                 <Input
+                  type="date"
                   value={dateStart}
                   placeholder="Ex: 02/02/2020"
                   onChange={e => setDateStart(e.target.value)}
                 />
                 <Title>Data do fim:</Title>
                 <Input
+                  type="date"
                   value={dateEnd}
                   placeholder="Ex: 03/06/2021"
                   onChange={e => setDateEnd(e.target.value)}
                 />
+                <Title>Comprovante (.pdf):</Title>
+                <Input type="file" accept=".pdf" />
               </div>
 
               <Button onClick={e => handlerSaveActivity(e)}>Salvar</Button>
