@@ -1,9 +1,9 @@
-import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Estagio from "./pages/Estagio";
-import ViewEstagio from "./pages/ViewEstagio";
-import segundaChamada from "./pages/segundaChamada";
+import Estagio from './pages/Estagio';
+import ViewEstagio from './pages/ViewEstagio';
+import segundaChamada from './pages/segundaChamada';
 
 export default function Routes() {
   return (
