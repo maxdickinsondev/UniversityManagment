@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import { toast } from "react-toastify";
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-import Input from "../../components/Input";
-import ButtonSubmit from "../../components/Button";
-import Select from "../../components/Select";
-import ModuleContainer from "../../components/ModuleContainer";
+import Input from '../../components/Input';
+import ButtonSubmit from '../../components/Button';
+import Select from '../../components/Select';
+import ModuleContainer from '../../components/ModuleContainer';
 
 import {
   Container,
@@ -16,26 +16,26 @@ import {
   MatriculaArea,
   EmailArea,
   Row,
-} from "./styles";
+} from './styles';
 
 export default function Estagio() {
   const history = useHistory();
 
-  const [estagio, setEstagio] = useState("");
-  const [matricula, setMatricula] = useState("");
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
+  const [estagio, setEstagio] = useState('');
+  const [matricula, setMatricula] = useState('');
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
 
   const [internship, setInternship] = useState([]);
 
   const [isSelected, setIsSelected] = useState(false);
 
   useEffect(() => {
-    const localData = localStorage.getItem("createInternship");
+    const localData = localStorage.getItem('createInternship');
     const dat = JSON.parse(localData);
 
     if (dat) {
-      history.push("/viewestagio");
+      history.push('/viewestagio');
     }
   }, []);
 
@@ -47,27 +47,29 @@ export default function Estagio() {
   function handleRequestNewInternship(event) {
     event.preventDefault();
 
-    if (matricula != "404513") {
-      toast.error("Matrícula incorreta, tente novamente!");
+    if (matricula != '404513') {
+      toast.error('Matrícula incorreta, tente novamente!');
       return;
     }
 
     const data = {
-      id: "1",
+      id: '1',
       type: estagio,
       name: nome,
       email: email,
       matricula: matricula,
-      status: "pending",
+      status: 'pending',
     };
 
     setInternship(data);
-    localStorage.setItem("createInternship", JSON.stringify(data));
+    localStorage.setItem('createInternship', JSON.stringify(data));
 
-    toast.success("Solicitação realizada com sucesso!");
+    toast.success('Solicitação realizada com sucesso!');
+
+    console.log(internship);
 
     setInterval(() => {
-      history.push("/viewestagio");
+      history.push('/viewestagio');
     }, 3000);
   }
 
@@ -83,8 +85,8 @@ export default function Estagio() {
             onChange={handleSelectedEstagio}
             title="Selecione uma opção"
             options={[
-              { value: "Estágio I", label: "Estágio I" },
-              { value: "Estágio II", label: "Estágio II" },
+              { value: 'Estágio I', label: 'Estágio I' },
+              { value: 'Estágio II', label: 'Estágio II' },
             ]}
           />
         </TypeArea>
@@ -102,7 +104,7 @@ export default function Estagio() {
                   <Input
                     value={nome}
                     placeholder="Informe seu nome"
-                    onChange={(event) => setNome(event.target.value)}
+                    onChange={event => setNome(event.target.value)}
                   />
                 </NameArea>
 
@@ -112,7 +114,7 @@ export default function Estagio() {
                   <Input
                     value={matricula}
                     placeholder="Informe sua matrícula"
-                    onChange={(event) => setMatricula(event.target.value)}
+                    onChange={event => setMatricula(event.target.value)}
                   />
                 </MatriculaArea>
               </Row>
@@ -123,7 +125,7 @@ export default function Estagio() {
                 <Input
                   value={email}
                   placeholder="Informe seu e-mail"
-                  onChange={(event) => setEmail(event.target.value)}
+                  onChange={event => setEmail(event.target.value)}
                 />
               </EmailArea>
 

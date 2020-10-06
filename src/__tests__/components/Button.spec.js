@@ -4,29 +4,25 @@ import { render, fireEvent, waitForElement, act } from '@testing-library/react';
 import Estagio from '../../pages/Estagio';
 
 describe('Button component', () => {
-    it('should be able to render button', async () => {
-        const { getByText, getByTestId } =  render(<Estagio />);
+  it('should be able to render button', async () => {
+    const { getByText, getByTestId } = render(<Estagio />);
 
-        const select = await waitForElement(
-            () => getByTestId('select-field')
-        );
-    
-        act(() => {
-            fireEvent.change(select, { target: { value: 'Estágio I' } });
-        });
+    const select = await waitForElement(() => getByTestId('select-field'));
 
-        expect(select.value).toEqual('Estágio I');
+    act(() => {
+      fireEvent.change(select, { target: { value: 'Estágio I' } });
+    });
 
-        //No trecho acima acabamos de testar se a opção selecionado pelo usuário no select foi mudada.
+    expect(select.value).toEqual('Estágio I');
 
-        const button = await waitForElement(
-            () => getByText('Solicitar')
-        );
+    //No trecho acima acabamos de testar se a opção selecionado pelo usuário no select foi mudada.
 
-        expect(button);
+    const button = await waitForElement(() => getByText('Solicitar'));
 
-        /*No trecho acima logo após o usuário ter selecionado uma opção de estágio, esperamos que um botão
+    expect(button);
+
+    /*No trecho acima logo após o usuário ter selecionado uma opção de estágio, esperamos que um botão
         tenha sido renderizado.
         */
-    });
+  });
 });

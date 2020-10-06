@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from 'react';
 
-import { Container, Title, table, td } from "./styles";
+import { Container, Title, table, td } from './styles';
 
-import { SegundaChamadaData } from "./data";
+import { SegundaChamadaData } from './data';
 
 export default function segundaChamada() {
   return (

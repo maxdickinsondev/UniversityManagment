@@ -1,8 +1,7 @@
-import React from "react";
+import React from 'react';
 import { Divider } from 'antd';
 
-import { Container, Title } from "./styles";
-
+import { Container, Title } from './styles';
 
 export default function ModuleContainer({ children, title }) {
   return (

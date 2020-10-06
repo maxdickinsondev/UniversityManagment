@@ -56,8 +56,7 @@
   "lint-staged": {
     "*.{js,jsx}": [
       "yarn pretty",
-      "yarn lint",
-      "yarn test"
+      "yarn lint"
     ]
   }
 }
