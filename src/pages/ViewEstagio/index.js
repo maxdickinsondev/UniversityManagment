@@ -45,35 +45,41 @@ export default function Estagio() {
 
   return (
     <Container>
-      <TypeArea>
-        <Title>Nível de estágio</Title>
+      {data ? (
+        <>
+          <TypeArea>
+            <Title>Nível de estágio</Title>
 
-        <Type> {data.type} </Type>
+            <Type> {data.type} </Type>
 
-        <Row>
-          <NameArea>
-            <Title>Nome</Title>
+            <Row>
+              <NameArea>
+                <Title>Nome</Title>
 
-            <Nome> {data.name} </Nome>
-          </NameArea>
+                <Nome> {data.name} </Nome>
+              </NameArea>
 
-          <MatriculaArea>
-            <Title>Matrícula</Title>
+              <MatriculaArea>
+                <Title>Matrícula</Title>
 
-            <Matricula> {data.matricula} </Matricula>
-          </MatriculaArea>
-        </Row>
+                <Matricula> {data.matricula} </Matricula>
+              </MatriculaArea>
+            </Row>
 
-        <EmailArea>
-          <Title>E-mail</Title>
+            <EmailArea>
+              <Title>E-mail</Title>
 
-          <Email> {data.email} </Email>
-        </EmailArea>
-      </TypeArea>
+              <Email> {data.email} </Email>
+            </EmailArea>
+          </TypeArea>
 
-      <Button onClick={() => handleDeleteRequestEstagio(data)}>
-        <MdDelete color="#7159c1" size={25} />
-      </Button>
+          <Button onClick={() => handleDeleteRequestEstagio(data)}>
+            <MdDelete color="#7159c1" size={25} />
+          </Button>
+        </>
+      ) : (
+        <h1>Sem solicitação de estágio</h1>
+      )}
     </Container>
   );
 }
