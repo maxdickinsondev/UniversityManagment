@@ -8,24 +8,7 @@ import Input from '../../components/Input';
 import { Container, Table, Modal, ModalContainer, Title } from './styles';
 import Select from '../../components/Select';
 
-const dataActivities = [
-  // {
-  //   id: 1,
-  //   categoria: "A",
-  //   dataInicio: "05/10/2020",
-  //   dataFim: "05/10/2022",
-  //   horas: 64,
-  //   anexo: "x/x/y/g.pdf",
-  // },
-  // {
-  //   id: 2,
-  //   categoria: "B",
-  //   dataInicio: "02/09/2020",
-  //   dataFim: "06/12/2021",
-  //   horas: 32,
-  //   anexo: "x/x/y/g.pdf",
-  // },
-];
+const dataActivities = [];
 
 export default function ComplementaryHours() {
   const [category, setCategory] = useState('');
