@@ -2,6 +2,9 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+  flex: 1;
+  width: 100%;
+  height: 400px;
   flex-direction: column;
   align-items: center;
 `;
@@ -55,16 +58,12 @@ export const ModalContainer = styled.div`
   background-color: #ffffff;
   border-radius: 8px;
   flex-direction: column;
+
   > a {
     margin-left: auto;
     & svg {
       color: #000;
     }
-  }
-
-  > form {
-    display: flex;
-    flex-direction: column;
   }
 `;
 
@@ -73,4 +72,11 @@ export const Title = styled.span`
   font-size: 18px;
 
   margin-bottom: 10px;
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  padding: 50px 100px;
+  align-items: start;
 `;
