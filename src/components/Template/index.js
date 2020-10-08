@@ -34,6 +34,9 @@ export default function Template({ children }) {
                   Solicitar horas complementares
                 </Link>
               </Menu.Item>
+              <Menu.Item key="5">
+                <Link to="matriculation">Solicitar matrícula</Link>
+              </Menu.Item>
             </Menu>
           </HeaderContainer>
           <Body>{children}</Body>
