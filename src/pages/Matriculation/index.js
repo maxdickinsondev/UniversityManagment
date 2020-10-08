@@ -85,27 +85,57 @@ function Matriculation() {
             return value;
           }
         });
-        console.log(newDisciplinesMatriculated);
       }
       setDisciplinesMatriculated(newDisciplinesMatriculated);
       localStorage.setItem(
         'disciplines',
         JSON.stringify(newDisciplinesMatriculated),
       );
+      notification.error({
+        message: 'Solicitação de matrícula removida!',
+        description: `Sua solicitação de matrícula para a disciplina ${matriculation.discipline} foi removida com sucesso!`,
+        placement: 'bottomLeft',
+      });
     }
   };
 
   const handleSubmit = () => {
-    const storage = JSON.parse(localStorage.getItem('disciplines'));
+    if (discipline) {
+      const storage = JSON.parse(localStorage.getItem('disciplines'));
 
-    if (storage) {
-      const filterData = storage.filter(value => {
-        return value.discipline === discipline;
-      });
+      if (storage) {
+        const filterData = storage.filter(value => {
+          return value.discipline === discipline;
+        });
 
-      if (filterData.length < 1) {
+        if (filterData.length < 1) {
+          const data = [
+            ...storage,
+            {
+              key: Math.floor(Math.random() * 100),
+              student,
+              discipline,
+              status: 'Pendente',
+            },
+          ];
+          localStorage.setItem('disciplines', JSON.stringify(data));
+          setDisciplinesMatriculated(data);
+          setDiscipline(null);
+
+          notification.success({
+            message: 'Solicitação realizada com sucesso!',
+            placement: 'bottomLeft',
+          });
+
+          return;
+        }
+
+        notification.error({
+          message: 'Solicitação para disciplina já realizada!',
+          placement: 'bottomLeft',
+        });
+      } else {
         const data = [
-          ...storage,
           {
             key: Math.floor(Math.random() * 100),
             student,
@@ -115,35 +145,13 @@ function Matriculation() {
         ];
         localStorage.setItem('disciplines', JSON.stringify(data));
         setDisciplinesMatriculated(data);
+        setDiscipline(null);
 
         notification.success({
           message: 'Solicitação realizada com sucesso!',
           placement: 'bottomLeft',
         });
-
-        return;
       }
-
-      notification.error({
-        message: 'Solicitação para disciplina já realizada',
-        placement: 'bottomLeft',
-      });
-    } else {
-      const data = [
-        {
-          key: Math.floor(Math.random() * 100),
-          student,
-          discipline,
-          status: 'Pendente',
-        },
-      ];
-      localStorage.setItem('disciplines', JSON.stringify(data));
-      setDisciplinesMatriculated(data);
-
-      notification.success({
-        message: 'Solicitação realizada com sucesso!',
-        placement: 'bottomLeft',
-      });
     }
 
     return;
