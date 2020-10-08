@@ -174,7 +174,7 @@ function Matriculation() {
             </Col>
 
             <Col span={12}>
-              <Item name="disciplines" label="Disciplinas" required>
+              <Item name="discipline" label="Disciplina" required>
                 <Select
                   showSearch
                   optionFilterProp="children"
