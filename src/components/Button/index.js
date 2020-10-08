@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Container, ButtonSubmit } from './styles';
 
-export default function Button({ onClick, children, type }) {
+export default function Button({ onClick, children, type, ...rest }) {
   return (
-    <Container>
+    <Container {...rest}>
       <ButtonSubmit type={type} onClick={onClick}>
         {children}
       </ButtonSubmit>
