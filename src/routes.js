@@ -5,7 +5,6 @@ import Estagio from './pages/Estagio';
 import ViewEstagio from './pages/ViewEstagio';
 import segundaChamada from './pages/segundaChamada';
 import ComplementaryHours from './pages/ComplementaryHours';
-import Matriculation from './pages/Matriculation';
 
 export default function Routes() {
   return (
@@ -14,7 +13,6 @@ export default function Routes() {
       <Route exact path="/viewestagio" component={ViewEstagio} />
       <Route exact path="/segundaChamada" component={segundaChamada} />
       <Route exact path="/horacomplementar" component={ComplementaryHours} />
-      <Route exact path="/matriculation" component={Matriculation} />
     </Switch>
   );
 }

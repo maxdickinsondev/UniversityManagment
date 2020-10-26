@@ -22,7 +22,6 @@
   "rules": {
     "prettier/prettier": "error",
     "no-undef": "off",
-    "react/prop-types": "off",
-    "react/display-name": "off"
+    "react/prop-types": "off"
   }
 }
